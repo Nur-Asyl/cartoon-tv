@@ -16,7 +16,7 @@ exports.signup = async (req, res) => {
     try {
         const savedUser = await user.save();
 
-        res.redirect('login');
+        res.redirect('user/login');
     } catch (err) {
         res.status(500).send({ message: err.message || "Some error occurred while creating user" });
     }
@@ -34,7 +34,7 @@ exports.login = async (req, res) => {
         req.session.user = user;
         
         console.log(req.session.userId)
-        res.render('index.ejs', { weatherData: null, forecastData: null, user: req.session.user});
+        res.redirect('/cartoons')
     } catch (error) {
         res.status(500).json({ message: error.message || 'Error during login' });
     }

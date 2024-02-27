@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <%- include('partials/navbar') %>
+
+    <div class="container">
+        <h1 class="mt-5">User Management</h1>
+
+        <h2>User List</h2>
+        <ul class="list-group">
+            <% users.forEach(user => { %>
+                <li class="list-group-item">
+                    <strong>Username:</strong> <%= user.username %> <br>
+                    <strong>Password:</strong> <%= user.password %> <br>
+                    <strong>Creation Date:</strong> <%= user.creationDate %> <br>
+                    <strong>Updated Date:</strong> <%= user.updatedDate %> <br>
+                    <strong>Deletion Date:</strong> <%= user.deletionDate %> <br>
+                    <strong>Admin Status:</strong> <%= user.adminStatus %> <br>
+                    <strong>Weather History:</strong> <%= user.weatherHistory %> <br>
+                    <a href="/admin/edit/<%= user._id %>" class="btn btn-primary">Edit</a>
+                    <a href="/admin/delete/<%= user._id %>" class="btn btn-danger">Delete</a>
+                </li>
+            <% }); %>
+        </ul>
+
+        <a href="/admin/add" class="btn btn-success mt-3">Add User</a>
+    </div>
+
+    <!-- Footer -->
+    <%- include('partials/footer') %>
+</body>
+</html>

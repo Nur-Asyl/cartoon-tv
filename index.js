@@ -38,6 +38,9 @@ app.use(session({
     saveUninitialized: true
 }));
 
+// middlewares
+const isAdmin = require('./middleware/adminMiddleware')
+
 // routes
 const userRoutes = require('./routes/userRoutes');
 const cartoonRoutes = require('./routes/cartoonRoutes');
