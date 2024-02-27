@@ -44,8 +44,10 @@ const isAdmin = require('./middleware/adminMiddleware')
 // routes
 const userRoutes = require('./routes/userRoutes');
 const cartoonRoutes = require('./routes/cartoonRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 app.use('/', cartoonRoutes);
 app.use('/user', userRoutes);
+app.use('/admin', isAdmin, adminRoutes)
 
 // launch
 app.listen(port, () => {

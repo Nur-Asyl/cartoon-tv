@@ -22,6 +22,7 @@ async function getCartoons() {
 router.get('/cartoons', async (req, res) => {
   try {
       const cartoons = await getCartoons();
+      console.log(cartoons)
       res.render('index', { cartoons, user: req.session.user });
   } catch (error) {
       console.error('Error rendering cartoons page:', error);
