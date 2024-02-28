@@ -1,7 +1,7 @@
 # Cartoon Unitoon TV
 See your favorite cartoons :)
 # DEPLOY
-https://cartoon-tv.onrender.com
+https://cartoon-tv.onrender.com/cartoons
 ## Dependencies
 npm install axios express body-parser ejs path  <br/>
 npm install newsapi ejs sessions mongoose bcrypt method-override @google-cloud/translate<br/>
