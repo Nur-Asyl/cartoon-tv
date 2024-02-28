@@ -1,9 +1,17 @@
 const UserModel = require('../models/user');
 
 exports.signup = async (req, res) => {
-    if (!req.body.username || !req.body.password) {
-        res.status(400).send({ message: 'Fields cannot be empty!' });
-        return;
+    const { username, password } = req.body;
+    if (!username || !password) {
+        let err = "Fields cannot be empty!"
+        
+        return res.render('signup', {err})
+    }
+
+    if(await UserModel.findOne({ username })) {
+        let err = "Username already in use"
+        
+        return res.render('signup', {err})
     }
 
     const user = new UserModel({
@@ -16,7 +24,7 @@ exports.signup = async (req, res) => {
     try {
         const savedUser = await user.save();
 
-        res.redirect('user/login');
+        res.redirect('login');
     } catch (err) {
         res.status(500).send({ message: err.message || "Some error occurred while creating user" });
     }
@@ -29,7 +37,9 @@ exports.login = async (req, res) => {
         const user = await UserModel.findOne({ username });
 
         if (!user || !(await user.isValidPassword(password))) {
-            return res.status(401).json({ message: 'Invalid email or password' });
+            let err = 'Invalid email or password'
+            
+            return res.render('login', {err});
         }
         req.session.user = user;
         

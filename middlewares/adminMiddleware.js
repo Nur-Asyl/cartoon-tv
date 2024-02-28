@@ -2,7 +2,7 @@
 
 const isAdmin = (req, res, next) => {
     if (!req.session.user) {
-        return res.redirect('/login'); 
+        return res.redirect('/user/login'); 
     }
 
     if (!req.session.user.adminStatus) {

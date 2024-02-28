@@ -1,10 +1,36 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+var methodOverride = require('method-override')
 
 // server
 const app = express();
 const port = process.env.PORT || 3000;
+app.use(methodOverride('_method'));
+
+
+// engines/ parsers/ static files/
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json())
+app.use(express.static(path.join(__dirname, 'public')));
+
+// translator
+// const i18n = require('i18n');
+// const path = require('path');
+
+// i18n.configure({
+//     locales: ['en', 'ru'],
+//     directory: path.join(__dirname, 'locales'),
+//     defaultLocale: 'en',
+//     cookie: 'lang',
+//     queryParameter: 'lang'
+// });
+
+// app.use(i18n.init);
+
 
 // mongoose
 const mongoose = require('mongoose');
@@ -21,14 +47,6 @@ mongoose.connect(dbURL, connectionParams).then(()=>{
         console.log("Error:", e);
     });
 
-// engines/ parsers/ static files/
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
-app.use(express.static(path.join(__dirname, 'public')));
-
 
 // session
 const session = require('express-session');
@@ -39,15 +57,18 @@ app.use(session({
 }));
 
 // middlewares
-const isAdmin = require('./middleware/adminMiddleware')
+const isAdmin = require('./middlewares/adminMiddleware')
 
 // routes
 const userRoutes = require('./routes/userRoutes');
 const cartoonRoutes = require('./routes/cartoonRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const adminCartoonRoutes = require('./routes/adminCartoonRoutes');
+
 app.use('/', cartoonRoutes);
 app.use('/user', userRoutes);
 app.use('/admin', isAdmin, adminRoutes)
+app.use('/admin', isAdmin, adminCartoonRoutes)
 
 // launch
 app.listen(port, () => {

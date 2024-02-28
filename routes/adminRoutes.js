@@ -3,12 +3,12 @@ const router = express.Router();
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
-const isAdmin = require('../middleware/adminMiddleware')
+const isAdmin = require('../middlewares/adminMiddleware')
 
 router.get('/', async (req, res) => {
     try {
         const users = await User.find();
-        res.render('admin', { users });
+        res.render('admin', { users, user: req.session.user});
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/add', isAdmin ,(req, res) => {
-    res.render('addUser');
+    res.render('addUser', {user: req.session.user});
 });
 
 router.post('/add', isAdmin, async (req, res) => {
@@ -47,8 +47,8 @@ router.post('/add', isAdmin, async (req, res) => {
 
 router.get('/edit/:id', isAdmin, async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
-        res.render('editUser', { user });
+        const userEdit = await User.findById(req.params.id);
+        res.render('editUser', { userEdit, user: req.session.user });
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -57,8 +57,8 @@ router.get('/edit/:id', isAdmin, async (req, res) => {
 
 router.post('/update/:id', isAdmin, async (req, res) => {
     try {
-        const { username, password, adminStatus } = req.body;
-        await User.findByIdAndUpdate(req.params.id, { username, password, adminStatus });
+        const { username, password } = req.body;
+        await User.findByIdAndUpdate(req.params.id, { username, password, updatedDate: new Date() });
         res.redirect('/admin');
     } catch (error) {
         console.error(error);

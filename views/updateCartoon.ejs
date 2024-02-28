@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Cartoon</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Edit Cartoon</h1>
+        <form action="/admin/cartoons/<%= cartoon.name %>" method="POST">
+            <!-- Name -->
+            <div class="row mb-3">
+                <label for="name" class="col-sm-2 col-form-label">Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="name" name="name" value="<%= cartoon.name %>" class="form-control" required>
+                </div>
+            </div>
+
+            <!-- Poster Path -->
+            <div class="row mb-3">
+                <label for="posterPath" class="col-sm-2 col-form-label">Poster Path:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="posterPath" name="posterPath" value="<%= cartoon.posterPath %>" class="form-control" required>
+                </div>
+            </div>
+
+            <!-- Rating -->
+            <div class="row mb-3">
+                <label for="rating" class="col-sm-2 col-form-label">Rating:</label>
+                <div class="col-sm-10">
+                    <input type="number" id="rating" name="rating" value="<%= cartoon.rating %>" min="0" max="10" step="0.1" class="form-control" required>
+                </div>
+            </div>
+
+            <!-- Backdrop Path -->
+            <div class="row mb-3">
+                <label for="backdropPath" class="col-sm-2 col-form-label">Backdrop Path:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="backdropPath" name="backdropPath" value="<%= cartoon.backdropPath %>" class="form-control">
+                </div>
+            </div>
+
+            <!-- Genres -->
+            <div class="row mb-3">
+                <label for="genres" class="col-sm-2 col-form-label">Genres:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="genres" name="genres" value="<%= cartoon.genres.join(', ') %>" class="form-control">
+                </div>
+            </div>
+
+            <!-- Origin Country -->
+            <div class="row mb-3">
+                <label for="originCountry" class="col-sm-2 col-form-label">Origin Country:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="originCountry" name="originCountry" value="<%= cartoon.originCountry.join(', ') %>" class="form-control">
+                </div>
+            </div>
+
+            <!-- Original Language -->
+            <div class="row mb-3">
+                <label for="originalLanguage" class="col-sm-2 col-form-label">Original Language:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="originalLanguage" name="originalLanguage" value="<%= cartoon.originalLanguage %>" class="form-control">
+                </div>
+            </div>
+
+            <!-- Original Name -->
+            <div class="row mb-3">
+                <label for="originalName" class="col-sm-2 col-form-label">Original Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="originalName" name="originalName" value="<%= cartoon.originalName %>" class="form-control">
+                </div>
+            </div>
+
+            <!-- Overview -->
+            <div class="row mb-3">
+                <label for="overview" class="col-sm-2 col-form-label">Overview:</label>
+                <div class="col-sm-10">
+                    <textarea id="overview" name="overview" class="form-control"><%= cartoon.overview %></textarea>
+                </div>
+            </div>
+
+            <!-- Popularity -->
+            <div class="row mb-3">
+                <label for="popularity" class="col-sm-2 col-form-label">Popularity:</label>
+                <div class="col-sm-10">
+                    <input type="number" id="popularity" name="popularity" value="<%= cartoon.popularity %>" min="0" step="0.01" class="form-control">
+                </div>
+            </div>
+
+            <!-- First Air Date -->
+            <div class="row mb-3">
+                <label for="firstAirDate" class="col-sm-2 col-form-label">First Air Date:</label>
+                <div class="col-sm-10">
+                    <input type="date" id="firstAirDate" name="firstAirDate" value="<%= cartoon.firstAirDate %>" class="form-control">
+                </div>
+            </div>
+
+            <!-- Vote Count -->
+            <div class="row mb-3">
+                <label for="voteCount" class="col-sm-2 col-form-label">Vote Count:</label>
+                <div class="col-sm-10">
+                    <input type="number" id="voteCount" name="voteCount" value="<%= cartoon.voteCount %>" min="0" class="form-control">
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="row mb-3">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Update Cartoon</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

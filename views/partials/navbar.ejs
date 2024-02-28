@@ -8,7 +8,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ms-auto me-5">
             <% if (!user) { %>
                 <li class="nav-item">
                     <form action="/user/login" method="get" class="nav-link">
@@ -22,11 +22,25 @@
                 </li>
             <% } else { %>
                 <li class="nav-item">
+                    <form action="/user/recently-viewed" method="get" class="nav-link">
+                        <button class="btn btn-primary" type="submit">Recently Viewed</button>
+                    </form>
+                </li>
+                <li class="nav-item">
                     <form action="/user/logout" method="POST" class="nav-link">
                         <button class="btn btn-danger" type="submit">Logout</button>
                     </form>
                 </li>
             <% } %>
+            
         </ul>
+        <div class="d-flex me-5">
+            <div id="google_translate_element"></div>
+        </div>
+        <script>
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+            }
+        </script>
     </div>
 </nav>

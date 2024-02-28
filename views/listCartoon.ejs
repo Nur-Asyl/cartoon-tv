@@ -1,0 +1,82 @@
+<!-- cartoons.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartoons</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .table th,
+        .table td {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Cartoons</h1>
+        <form action="/admin/cartoon" method="get">
+            <button class="btn btn-primary mb-3">Create</button>
+        </form>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Poster Path</th>
+                    <th>Rating</th>
+                    <th>Adult</th>
+                    <th>Backdrop Path</th>
+                    <th>Genres</th>
+                    <th>Origin Country</th>
+                    <th>Original Language</th>
+                    <th>Original Name</th>
+                    <th>Overview</th>
+                    <th>Popularity</th>
+                    <th>First Air Date</th>
+                    <th>Vote Count</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% cartoons.forEach(cartoon => { %>
+                    <tr>
+                        <td><%= cartoon.id %></td>
+                        <td><%= cartoon.name %></td>
+                        <td><%= cartoon.posterPath %></td>
+                        <td><%= cartoon.rating %></td>
+                        <td><%= cartoon.adult %></td>
+                        <td><%= cartoon.backdropPath %></td>
+                        <td>
+                            <% cartoon.genres.forEach(genre => { %>
+                                <%= genre %><br>
+                            <% }); %>
+                        </td>
+                        <td>
+                            <% cartoon.originCountry.forEach(country => { %>
+                                <%= country %><br>
+                            <% }); %>
+                        </td>
+                        <td><%= cartoon.originalLanguage %></td>
+                        <td><%= cartoon.originalName %></td>
+                        <td><%= cartoon.overview %></td>
+                        <td><%= cartoon.popularity %></td>
+                        <td><%= cartoon.firstAirDate %></td>
+                        <td><%= cartoon.voteCount %></td>
+                        <td>
+                            <a href="/admin/cartoons/<%= cartoon.name %>" class="btn btn-warning btn-sm me-2">Edit</a>
+                            <form action="/admin/cartoon/<%= cartoon.name %>" method="get" class="d-inline">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
