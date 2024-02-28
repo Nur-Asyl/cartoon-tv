@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // mongoose
 const mongoose = require('mongoose');
-const dbURL = "mongodb://localhost:27017/cartoon_tv";
+const dbURL = "mongodb+srv://Nur-Asyl:min@cluster0.wxztznh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 const connectionParams = {
     useNewUrlParser: true,
